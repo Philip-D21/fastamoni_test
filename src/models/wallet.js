@@ -28,7 +28,7 @@ const WalletModel = sequelize.define(
   },
 },
 {
-    tableName: "wallets",
+    tableName: "Wallet",
   }
 );
 

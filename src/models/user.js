@@ -26,14 +26,14 @@ const UserModel = sequelize.define(
     password: {
       type: DataTypes.STRING,
     },
-    transactionPin: {
-        type: DataTypes.STRING,
-        allowNull: true
-    },
-    confirmTransactionPin: {
-        type: DataTypes.STRING,
-        allowNull: true, 
-    },
+    // transactionPin: {
+    //     type: DataTypes.STRING,
+    //     allowNull: true
+    // },
+    // confirmTransactionPin: {
+    //     type: DataTypes.STRING,
+    //     allowNull: true, 
+    // },
 },
   {
     tableName: "users",

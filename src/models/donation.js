@@ -26,9 +26,6 @@ const DonationModel = sequelize.define(
     defaultValue: DataTypes.NOW()
   },
 },
-{
-    tableName: "Donations",
-  }
 );
 
 // Define associations (e.g., Donation.belongsTo(User, { as: 'donor' }))

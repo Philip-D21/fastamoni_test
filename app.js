@@ -50,11 +50,11 @@ app.get( "/", (req,res) => {
 })
 
 
-//rputes as middleware
+//routes as middleware
 app.use("/api/auth", authRouter);
 app.use("/api/wallet", walletRouter);
 app.use("/api/donation", donationRouter);
-app.use("/api/user", transactionRouter);
+app.use("/api/pin", transactionRouter);
 
 
 

@@ -3,8 +3,8 @@ const router = express.Router();
 const walletController = require('../controller/walletController');
 
 
-router.post('/wallets', walletController.createWallet); 
-router.get('/wallets/:userId', walletController.getWalletBalance); 
+router.post('/', walletController.createWallet); 
+router.get('/:userId', walletController.getWalletBalance); 
 
 
 

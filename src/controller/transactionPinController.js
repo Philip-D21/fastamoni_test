@@ -1,4 +1,4 @@
-const UserModel = require('../models/user');
+const TransactionModel = require('../models/transactionPin');
 const AppError = require('../utils/AppError');
 
 const setTransactionPin = async (req, res, next) => {
