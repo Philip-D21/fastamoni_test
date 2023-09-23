@@ -1,3 +1,4 @@
+//installing packages
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -8,11 +9,13 @@ const session = require('express-session');
 //imported global error handler and utility functions 
 const globalErrorHandler = require('./src/helpers/errorHandler');
 
+
 //call database and sync
 require('./src/models/index');
 require('./src/models/sync');
 
 
+//imprting api routes
 const authRouter = require("./src/route/auth");
 const walletRouter = require("./src/route/wallet");
 const donationRouter = require("./src/route/donation");
@@ -29,6 +32,7 @@ app.use(helmet());
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
 
 
 
