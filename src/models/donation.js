@@ -28,6 +28,7 @@ const DonationModel = sequelize.define(
 },
 );
 
+
 // Define associations
 DonationModel.belongsTo(UserModel, { foreignKey: 'donorId', as: 'donor' });
 DonationModel.belongsTo(UserModel, { foreignKey: 'beneficiaryId', as: 'beneficiary' });

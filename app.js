@@ -6,6 +6,8 @@ const morgan = require("morgan");
 const helmet = require("helmet");
 const session = require('express-session');
 
+
+
 //imported global error handler and utility functions 
 const globalErrorHandler = require('./src/helpers/errorHandler');
 
@@ -21,9 +23,9 @@ const walletRouter = require("./src/route/wallet");
 const donationRouter = require("./src/route/donation");
 const transactionRouter = require("./src/route/transactionPin");
 
+
 // create an express app
 const app = express()
-
 
 
 //middlewares
@@ -32,7 +34,6 @@ app.use(helmet());
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
 
 
 

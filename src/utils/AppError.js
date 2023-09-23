@@ -10,5 +10,5 @@ class AppError extends Error {
   }
   
   module.exports = AppError;
-  
+
   new AppError("Not found", 404);

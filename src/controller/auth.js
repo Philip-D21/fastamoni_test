@@ -41,33 +41,29 @@ const register = async (req, res, next) => {
 
 //login user
 const login = async (req, res, next) => {
-
   const { email, password } = req.body;
-
   if (!email || !password) {
     return res.status(400).json("Please provide valid email address and password.")
   }
   const user = await UserModel.findOne({ where: { email } });
-
   if (!user) {
     return res.status(401).json("Invalid email or password");
   }
-
   const isValidPassword = await bcrypt.compare(password, user.password);
   if (!isValidPassword) {
     return res.status(401).json("Invalid  password");
   }
-
   const token = jwt.sign({ id: user.id, fullname: user.fullname, username: user.username, email: user.email }, process.env.JWT_KEY, {
     expiresIn: "1d",
   });
-
 
   return res.status(200).json({
     status: "success",
     token,
   });
 };
+
+
 
 
 

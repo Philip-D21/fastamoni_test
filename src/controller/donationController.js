@@ -60,18 +60,16 @@ const getDonationCounts = async (req, res, next) => {
 };
 
 
-// single donation by a user to fellow user
+// single donation by a user to fellow user ======================Having with these function===================================
 const getSingleDonation = async (req, res, next) => {
   try {
-    const { userId } = req.params; // The user requesting the donation
-    const { donationId } = req.params; // The unique ID of the donation
+    const { userId, donationId } = req.params;
 
-    // Check if the user exists
     const user = await UserModel.findByPk(userId);
-
     if (!user) {
       return next(new AppError("User not found", 404));
     }
+
     const donation = await DonationModel.findByPk(donationId);
     if (!donation) {
       return next(new AppError("Donation not found", 404));
@@ -79,14 +77,19 @@ const getSingleDonation = async (req, res, next) => {
     if (donation.donorId !== userId) {
       return next(new AppError("Unauthorized access to this donation", 403));
     }
+  const result = await DonationModel.findByPk({
+     where: {donorId: userId}
+  })
 
    return res.status(200).json({
-      donation,
+      result
     });
 
   } catch (error) {
-    console.error("Error getting single donation:", error);
-    return next(error);
+    console.log("Error getting single donation:", error);
+    return res.status(500).json({
+        error: error.message
+    })
   }
 };
 
@@ -96,32 +99,23 @@ const getSingleDonation = async (req, res, next) => {
 const getDonationsInPeriod = async (req, res, next) => {
     try {
       const { userId } = req.params; // The user requesting the donations
-      const { startDate, endDate, page, pageSize } = req.query; // The start and end date of the period
+      const { specificDate, page, pageSize } = req.query; // The start and end date of the period
   
-      // Check if the user exists
       const user = await UserModel.findByPk(userId);
-  
       if (!user) {
         return next(new AppError('User not found', 404));
       }
-  
-      // Parse the start and end dates into JavaScript Date objects
-      const startDateObj = new Date(startDate);
-      const endDateObj = new Date(endDate);
-   
-       // Calculate the offset based on the page and pageSize
        const offset = (page - 1) * pageSize;
-
       // Find donations made by the user within the specified time range
       const donations = await DonationModel.findAll({
         where: {
           donorId: userId,
           createdAt: {
-            [Op.between]: [startDateObj, endDateObj],
+            [Op.like]: `${specificDate}%`
           },
         },
-        limit: pageSize, // Limit the number of results per page
-        offset: offset, // Offset to skip results on previous pages
+        limit: pageSize,
+        offset: offset, 
       });
       res.status(200).json({
         donations,
@@ -131,6 +125,10 @@ const getDonationsInPeriod = async (req, res, next) => {
       return next(error);
     }
   };
+// ====================================== stop here ========================================
+
+
+
 
 
 module.exports = {
