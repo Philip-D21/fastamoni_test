@@ -27,9 +27,9 @@ const WalletModel = sequelize.define(
     type: DataTypes.JSON,
   },
 },
-{
-    tableName: "Wallet",
-  }
+// {
+//     tableName: "Wallet",
+//   }
 );
 
 // Define associations (e.g., Wallet.belongsTo(User))

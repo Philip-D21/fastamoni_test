@@ -1,6 +1,6 @@
 const {DataTypes}= require('sequelize');
 const sequelize = require('./index');
-
+const UserModel = require('./user')
 const DonationModel = sequelize.define(
   'Donation', 
   {
@@ -28,7 +28,9 @@ const DonationModel = sequelize.define(
 },
 );
 
-// Define associations (e.g., Donation.belongsTo(User, { as: 'donor' }))
-// You should set up two associations for donor and beneficiary
+// Define associations
+DonationModel.belongsTo(UserModel, { foreignKey: 'donorId', as: 'donor' });
+DonationModel.belongsTo(UserModel, { foreignKey: 'beneficiaryId', as: 'beneficiary' });
+
 
 module.exports = DonationModel;

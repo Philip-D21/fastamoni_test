@@ -58,7 +58,7 @@ app.get( "/", (req,res) => {
 app.use("/api/auth", authRouter);
 app.use("/api/wallet", walletRouter);
 app.use("/api/donation", donationRouter);
-app.use("/api/pin", transactionRouter);
+app.use("/api", transactionRouter);
 
 
 
