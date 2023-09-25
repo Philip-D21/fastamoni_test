@@ -93,9 +93,7 @@ const getSingleDonation = async (req, res, next) => {
 };
 
 
-
 // user can view donation details made in specific of time 
-
 const getDonationsInPeriod = async (req, res, next) => {
     try {
       const { userId } = req.params; 
