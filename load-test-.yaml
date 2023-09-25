@@ -25,7 +25,7 @@ scenarios:
       - get: # Wallet
           url: '/api/wallet'
       - post: # Transaction Pin
-          url: '/api/transaction-pin'
+          url: '/api/set-pin'
           json:
             userId: 1 
             transactionPin: '5104' 

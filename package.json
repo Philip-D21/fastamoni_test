@@ -29,5 +29,8 @@
     "op": "^0.0.6",
     "parser": "^0.1.4",
     "sequelize": "^6.33.0"
+  },
+  "devDependencies": {
+    "artillery": "^2.0.0-37"
   }
 }
