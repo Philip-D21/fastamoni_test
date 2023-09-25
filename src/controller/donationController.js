@@ -95,35 +95,46 @@ const getSingleDonation = async (req, res, next) => {
 
 
 // user can view donation details made in specific of time 
+
 const getDonationsInPeriod = async (req, res, next) => {
     try {
-      const { userId } = req.params;
-      const { specificDate, page, pageSize } = req.query; 
+      const { userId } = req.params; 
+      const { startDate, endDate, page, pageSize } = req.query; 
   
+      // Check if the user exists
       const user = await UserModel.findByPk(userId);
+  
       if (!user) {
         return next(new AppError('User not found', 404));
       }
-       const offset = (page - 1) * pageSize;
-      
-      const donations = await DonationModel.findAll({
+  
+      const startDateObj = new Date(startDate);
+      const endDateObj = new Date(endDate);
+  
+      // Calculate the offset based on the page and pageSize
+      const offset = (page - 1) * pageSize;
+ 
+      const { rows: donations, count: totalCount } = await DonationModel.findAndCountAll({
         where: {
           donorId: userId,
           createdAt: {
-            [Op.like]: `${specificDate}%`
+            [Op.between]: [startDateObj, endDateObj],
           },
         },
-        limit: pageSize,
+        limit: pageSize, 
         offset: offset, 
       });
+  
       res.status(200).json({
         donations,
+        totalCount,
       });
     } catch (error) {
       console.error('Error getting donations in period:', error);
       return next(error);
     }
   };
+  
 // ====================================== stop here ========================================
 
 
@@ -150,9 +161,6 @@ const processDonation = async (userId) => {
     console.error('Error processing donation:', error);
   }
 };
-
-
-
 
 
 
