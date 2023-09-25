@@ -1,0 +1,32 @@
+
+config:
+  target: 'http://localhost:7000' 
+  phases:
+    - duration: 30
+      arrivalRate: 100 
+  defaults:
+    headers:
+      User-Agent: 'Artillery'
+scenarios:
+  - flow:
+      - post: # Signup user
+          url: '/api/auth/signup'
+          json:
+            username: 'testuser'
+            email: 'testuser@example.com'
+            password: 'password123'
+      - post: # Login
+          url: '/api/auth/login'
+          json:
+            username: 'testuser'
+            password: 'password123'
+      - get: # Donation
+          url: '/api/donation'
+      - get: # Wallet
+          url: '/api/wallet'
+      - post: # Transaction Pin
+          url: '/api/transaction-pin'
+          json:
+            userId: 1 
+            transactionPin: '5104' 
+            confirmTransactionPin: '5104' 

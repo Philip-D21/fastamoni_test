@@ -4,6 +4,7 @@
   "description": "Allow user make donations",
   "main": "app.js",
   "scripts": {
+    "test:load": "forever start -c artillery run load-test.yml && sleep 30 && forever stop 0",
     "start": "node app.js",
     "dev": "nodemon app.js"
   },
@@ -23,6 +24,7 @@
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "mysql2": "^3.6.1",
+    "nodemailer": "^6.9.5",
     "nodemon": "^3.0.1",
     "op": "^0.0.6",
     "parser": "^0.1.4",
