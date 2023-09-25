@@ -2,7 +2,7 @@ const DonationModel = require("../models/donation");
 const UserModel = require("../models/user");
 const AppError = require("../utils/AppError");
 const {Op} = require("sequelize");
-
+const mailer = require("../helpers/mailer");
 
 
 // Allow user donate
@@ -69,7 +69,6 @@ const getSingleDonation = async (req, res, next) => {
     if (!user) {
       return next(new AppError("User not found", 404));
     }
-
     const donation = await DonationModel.findByPk(donationId);
     if (!donation) {
       return next(new AppError("Donation not found", 404));
@@ -127,6 +126,36 @@ const getDonationsInPeriod = async (req, res, next) => {
   };
 // ====================================== stop here ========================================
 
+ // Implement this function for sending messages
+
+
+
+
+// Function to increment donation count and send thank you message if needed
+const processDonation = async (userId) => {
+  try {
+    // Find the user
+    const user = await UserModel.findByPk(userId);
+
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    
+    user.donationCount += 1;
+    await user.save();
+
+    if (user.donationCount >= 2) {
+    
+      await mailer(user); 
+    }
+  } catch (error) {
+    console.error('Error processing donation:', error);
+  }
+};
+
+
+
 
 
 
@@ -136,4 +165,5 @@ module.exports = {
   getDonationCounts,
   getSingleDonation,
   getDonationsInPeriod,
+  processDonation
 };

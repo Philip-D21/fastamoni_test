@@ -20,7 +20,6 @@ const mail = async (user) => {
       text: 'Dear user, thank you for making multiple donations. We appreciate your support!',
     };
 
-    
     const info = await transporter.sendMail(mailOptions);
 
     console.log('Email sent:', info.response);
