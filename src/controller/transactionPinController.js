@@ -3,12 +3,16 @@ const AppError = require('../utils/AppError');
 const UserModel = require('../models/user');
 const { Op } = require('sequelize'); 
 
+
+
 const setTransactionPin = async (req, res, next) => {
   try {
     const { userId, transactionPin, confirmTransactionPin } = req.body;
+
     if (typeof transactionPin !== 'number' || transactionPin < 1000 || transactionPin > 9999) {
       return next(new AppError('Transaction PIN must be a 4-digit number', 409));
     }
+    
     const user = await UserModel.findByPk(userId);
 
     if (!user) {
@@ -43,6 +47,8 @@ const setTransactionPin = async (req, res, next) => {
     return next(error);
   }
 };
+
+
 
 module.exports = {
   setTransactionPin,

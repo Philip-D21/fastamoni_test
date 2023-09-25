@@ -10,7 +10,7 @@ router.post('/', donationController.createDonation);
 router.get('/count/:userId', donationController.getDonationCounts);
 router.get('/:userId/:donationId', donationController.getSingleDonation);
 router.get('/:userId', donationController.getDonationsInPeriod);
-
+router.post('/message/:userId', donationController.processDonation);
 
 
 

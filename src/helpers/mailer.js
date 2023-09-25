@@ -17,7 +17,7 @@ const mail = async (user) => {
       from: 'your-email@example.com', 
       to: user.email,
       subject: 'Thank You for Your Donations',
-      text: 'Dear user, thank you for making multiple donations. We appreciate your support!',
+      text: `Dear ${user.username},\n\nThank you for making multiple donations. We appreciate your support!`,
     };
 
     const info = await transporter.sendMail(mailOptions);

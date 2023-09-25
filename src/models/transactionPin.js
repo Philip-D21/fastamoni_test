@@ -19,9 +19,7 @@ const TransactionModel = sequelize.define(
         allowNull: false, 
     },
 },
-    // {
-    //     tableName: "TransactionPin"
-    // }
+   
 );
 
 

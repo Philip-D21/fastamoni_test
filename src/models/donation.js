@@ -1,6 +1,7 @@
 const {DataTypes}= require('sequelize');
 const sequelize = require('./index');
-const UserModel = require('./user')
+const UserModel = require('./user');
+
 const DonationModel = sequelize.define(
   'Donation', 
   {
@@ -21,12 +22,17 @@ const DonationModel = sequelize.define(
     type: DataTypes.FLOAT,
     allowNull: false,
   },
+  donationCount: {
+    type: DataTypes.INTEGER, 
+    defaultValue: 0, 
+  },
   createdAt: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW()
   },
 },
 );
+
 
 
 // Define associations

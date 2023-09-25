@@ -1,5 +1,6 @@
 const {DataTypes} = require('sequelize');
 const sequelize = require('./index');
+const UserModel = require("./user");
 
 const WalletModel = sequelize.define(
 'Wallet', 
@@ -27,11 +28,9 @@ const WalletModel = sequelize.define(
     type: DataTypes.JSON,
   },
 },
-// {
-//     tableName: "Wallet",
-//   }
-);
+)
 
-// Define associations (e.g., Wallet.belongsTo(User))
+
+WalletModel.belongsTo(UserModel, { foreignKey: 'userId', as: 'user' })
 
 module.exports = WalletModel;

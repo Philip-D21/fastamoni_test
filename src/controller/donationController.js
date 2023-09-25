@@ -76,8 +76,8 @@ const getSingleDonation = async (req, res, next) => {
     if (donation.donorId !== userId) {
       return next(new AppError("Unauthorized access to this donation", 403));
     }
-  const result = await DonationModel.findByPk({
-     where: {donorId: userId}
+    const result = await DonationModel.findByPk({
+      where: {donorId: userId}
   })
 
    return res.status(200).json({
@@ -97,15 +97,15 @@ const getSingleDonation = async (req, res, next) => {
 // user can view donation details made in specific of time 
 const getDonationsInPeriod = async (req, res, next) => {
     try {
-      const { userId } = req.params; // The user requesting the donations
-      const { specificDate, page, pageSize } = req.query; // The start and end date of the period
+      const { userId } = req.params;
+      const { specificDate, page, pageSize } = req.query; 
   
       const user = await UserModel.findByPk(userId);
       if (!user) {
         return next(new AppError('User not found', 404));
       }
        const offset = (page - 1) * pageSize;
-      // Find donations made by the user within the specified time range
+      
       const donations = await DonationModel.findAll({
         where: {
           donorId: userId,
@@ -126,8 +126,6 @@ const getDonationsInPeriod = async (req, res, next) => {
   };
 // ====================================== stop here ========================================
 
- // Implement this function for sending messages
-
 
 
 
@@ -141,7 +139,6 @@ const processDonation = async (userId) => {
       throw new Error('User not found');
     }
 
-    
     user.donationCount += 1;
     await user.save();
 
